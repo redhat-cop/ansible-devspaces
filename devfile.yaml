@@ -12,13 +12,55 @@ projects:
         remote: origin
         revision: main
 components:
-- name: dev-tools
-  container:
-    image: quay.io/cgruver0/che/ocp-4-20-userns:latest
-    memoryLimit: 8Gi
-    cpuLimit: "2"
-    env:
-    - name: HOME
-      value: "/projects/home"
-    - name: VSCODE_DEFAULT_WORKSPACE
-      value: "/projects/ansible-devspaces/.code-workspace"
+  - name: dev-tools
+    # Disabling as this may not longer be needed in 4.20+
+    # attributes:
+    #   pod-overrides:
+    #     metadata:
+    #       annotations:
+    #         # Ask for /dev/fuse and /dev/net/tun to be mapped into this Pod
+    #         io.kubernetes.cri-o.Devices: "/dev/fuse,/dev/net/tun"
+    #     spec:
+    #       # Instruct the container runtime to create a new user namespace for the containers in this Pod.
+    #       hostUsers: false
+    #   container-overrides:
+    #     securityContext:
+    #       # Ask for an unmasked /proc to be available to this container
+    #       procMount: Unmasked
+    container:
+      image: quay.io/jpullen0/ansible-devspaces-nested-podman:opencode
+      cpuLimit: 4000m
+      cpuRequest: 250m
+      memoryRequest: 128Mi
+      memoryLimit: 8Gi
+      env:
+        - name: HOME
+          value: "/projects/home"
+        - name: VSCODE_DEFAULT_WORKSPACE
+          value: "/projects/ansible-devspaces/.code-workspace"
+  - name: prep-workspace
+    container:
+      args:
+        - '-c'
+        - >-
+          mkdir -p /projects/bin && cp /usr/bin/oc /projects/bin/oc && cp /usr/bin/kubectl /projects/bin/kubectl && if [[ -f ${HOME}/.kube/config ]]; then rm ${HOME}/.kube/config; fi
+      command:
+        - /bin/bash
+      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+      mountSources: true
+      sourceMapping: /projects
+      memoryRequest: 128Mi
+      memoryLimit: 256Mi
+      cpuRequest: 10m
+      cpuLimit: 200m
+      env:
+      - name: HOME
+        value: "/projects/home"
+commands:
+  - apply:
+      component: prep-workspace
+      label: Pre Start Prep
+    id: prep-workspace
+events:
+  preStart:
+    - prep-workspace
