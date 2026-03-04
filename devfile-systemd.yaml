@@ -7,7 +7,7 @@ components:
   - name: dev-tools
     container:
       # image: quay.io/jpullen0/ansible-devspaces-nested-podman:opencode
-      image: quay.io/cgruver0/che/ansible-dev-tools:no-systemd
+      image: quay.io/cgruver0/che/ansible-dev-tools:systemd
       cpuLimit: 4000m
       cpuRequest: 250m
       memoryRequest: 128Mi
