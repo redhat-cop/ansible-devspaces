@@ -1,5 +1,7 @@
 # Ansible Development Workspace Sample
 
+[![Contribute](https://www.eclipse.org/che/contribute.svg)](https://devspaces.apps.region-03.clg.lab/#https://github.com/cgruver/ansible-devspaces)
+
 Welcome to the Ansible Development Workspace sample repository! This repository provides a ready-to-use, containerized development environment for Ansible content creation, testing, and debugging using Red Hat OpenShift Dev Spaces.
 
 By importing this repository into Dev Spaces, you instantly get a pre-configured, browser-based IDE equipped with all the essential tools you need to build high-quality automation—without installing anything on your local machine.
