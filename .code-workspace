@@ -2,24 +2,25 @@
 	"settings": {
 		"ansible.lightspeed.suggestions.enabled": true,
 		"ansible.lightspeed.enabled": true,
-        "ansible.ansible.useFullyQualifiedCollectionNames": true,
-        "ansible.validation.enabled": true,
-        "ansible.validation.lint.enabled": true,
-        "files.trimTrailingWhitespace": true,
-        "files.trimFinalNewlines": true,
-        "files.insertFinalNewline": true,
-        "ansible.validation.lint.arguments": "--profile production --offline",
-        "openshiftToolkit.showWelcomePage": false,
+		"ansible.ansible.useFullyQualifiedCollectionNames": true,
+		"ansible.validation.enabled": true,
+		"ansible.validation.lint.enabled": true,
+		"files.trimTrailingWhitespace": true,
+		"files.trimFinalNewlines": true,
+		"files.insertFinalNewline": true,
+		"ansible.validation.lint.arguments": "--profile production --offline",
+		"openshiftToolkit.showWelcomePage": false,
 		"editor.wordWrap": "on",
 		"files.autoSave": "off"
 	},
+	"python.useEnvironmentsExtension": true,
 	"folders": [
 		{
 			"name": "ansible-devspaces",
 			"path": "/projects/ansible-devspaces"
 		}
 	],
-    "extensions": {
+	"extensions": {
 		"recommendations": [
 			"redhat.ansible",
 			"redhat.vscode-yaml",
