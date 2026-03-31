@@ -36,6 +36,7 @@ RUN microdnf --disableplugin=subscription-manager install -y ${INSTALL_PACKAGES}
     echo "user:1001:64535" >> /etc/subgid ; \
     setcap cap_setuid+ep /usr/bin/newuidmap ; \
     setcap cap_setgid+ep /usr/bin/newgidmap ; \
+    ln -sf /usr/bin/python3.11 /usr/bin/python3 ; \
     echo "user ALL=NOPASSWD: /set-cgroups.sh" >> /etc/sudoers
 
 USER 1000
