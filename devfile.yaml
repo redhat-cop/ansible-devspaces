@@ -1,4 +1,4 @@
-schemaVersion: 2.2.0
+schemaVersion: 2.3.0
 attributes:
   controller.devfile.io/storage-type: per-workspace
 metadata:
@@ -6,62 +6,15 @@ metadata:
 components:
   - name: dev-tools
     container:
-      # image: quay.io/jpullen0/ansible-devspaces-nested-podman:opencode
-      image: quay.io/cgruver0/che/ansible-dev-tools:systemd
+      image: ghcr.io/ansible/ansible-devspaces:latest
       cpuLimit: 4000m
       cpuRequest: 250m
       memoryRequest: 128Mi
       memoryLimit: 8Gi
       env:
         - name: HOME
-          value: "/projects/home"
+          value: "/projects"
         - name: VSCODE_DEFAULT_WORKSPACE
           value: "/projects/ansible-devspaces/.code-workspace"
-  - name: prep-workspace
-    container:
-      args:
-        - '-c'
-        - >-
-          mkdir -p /projects/bin && cp /usr/bin/oc /projects/bin/oc && cp /usr/bin/kubectl /projects/bin/kubectl && if [[ -f ${HOME}/.kube/config ]]; then rm ${HOME}/.kube/config; fi
-      command:
-        - /bin/bash
-      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
-      mountSources: true
-      sourceMapping: /projects
-      memoryRequest: 128Mi
-      memoryLimit: 256Mi
-      cpuRequest: 10m
-      cpuLimit: 200m
-      env:
-      - name: HOME
-        value: "/projects/home"
-  - name: prep-python-venv
-    container:
-      image: quay.io/cgruver0/che/ansible-dev-tools:systemd
-      sourceMapping: /projects
-      memoryRequest: 128Mi
-      memoryLimit: 1Gi
-      cpuRequest: 10m
-      cpuLimit: 200m
-      mountSources: true
-      args:
-        - '-c'
-        - '${PROJECT_SOURCE}/.workspace-init/init-python-venv.sh'
-      command:
-        - /bin/bash
-      env:
-      - name: HOME
-        value: "/projects/home"
-commands:
-  - apply:
-      component: prep-workspace
-      label: Pre Start Prep
-    id: prep-workspace
-  - apply:
-      component: prep-python-venv
-      label: Pre Start Python Prep
-    id: prep-python-venv
-events:
-  preStart:
-    - prep-workspace
-    - prep-python-venv
+        - name: "ADT_CONTAINER_ENGINE"
+          value: "podman"
