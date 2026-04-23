@@ -1,4 +1,4 @@
-schemaVersion: 2.2.0
+schemaVersion: 2.3.0
 attributes:
   controller.devfile.io/storage-type: per-workspace
 metadata:
@@ -18,28 +18,3 @@ components:
           value: "/projects/ansible-devspaces/.code-workspace"
         - name: "ADT_CONTAINER_ENGINE"
           value: "podman"
-  - name: prep-python-venv
-    container:
-      image: ghcr.io/ansible/ansible-devspaces:latest
-      sourceMapping: /projects
-      memoryRequest: 128Mi
-      memoryLimit: 1Gi
-      cpuRequest: 10m
-      cpuLimit: 200m
-      mountSources: true
-      args:
-        - '-c'
-        - '${PROJECT_SOURCE}/.workspace-init/init-python-venv.sh'
-      command:
-        - /bin/bash
-      env:
-      - name: HOME
-        value: "/projects/home"
-commands:
-  - apply:
-      component: prep-python-venv
-      label: Pre Start Python Prep
-    id: prep-python-venv
-events:
-  preStart:
-    - prep-python-venv

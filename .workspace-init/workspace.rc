@@ -1,6 +1,0 @@
-# Put additional workspace config here that you want to run on workspace startup
-
-if [[ -d ${PROJECTS_ROOT}/.venv ]]
-then
-  source ${PROJECTS_ROOT}/.venv/bin/activate
-fi
