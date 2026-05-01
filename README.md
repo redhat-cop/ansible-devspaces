@@ -48,11 +48,13 @@ To launch this environment, you can create a workspace with this Git repository 
 
 Once the provisioning process completes, a VS Code environment will open in your browser, ready for development.
 
-There is a sample `ansible-navigator.yaml` file in the root of this project.
+There is a sample `ansible-navigator.yaml` file in the root of this project that can be used to customize how the `ansible-navigator` utilize is configured. Common customizations include specifying an alternate Execution Environment Image (such as one originating from the Red Hat Container Catalog [`registry.redhat.io`]) or whether playbook artifacts should be captured. To utilize the sample configuration file, perform the following steps:
 
 1. Rename `ansible-navigator.yaml.sample` to `ansible-navigator.yaml`
 1. Make any desired modifications to the file.
-1. Launch the environment from a teminal by running `ansible-navigator`
+1. The file will be loaded from the current working directory or from one of the default locations as described [here](https://docs.ansible.com/projects/navigator/settings).
+1. Launch the environment from a terminal by running `ansible-navigator`.
+1. Make any additional adjustments as desired.
 
 ## Best Practices
 
