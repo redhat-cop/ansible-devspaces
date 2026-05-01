@@ -1,0 +1,47 @@
+ansible-navigator:
+
+  execution-environment:
+    container-engine: podman
+
+    # Pass custom environment variables
+    environment-variables:
+      pass:
+        - ONE
+        - TWO
+        - THREE
+      set:
+        KEY1: VALUE1
+        KEY2: VALUE2
+        KEY3: VALUE3
+
+    # image: aap.example.com/custom-ee:v1
+
+    pull:
+      arguments:
+        - "--tls-verify=false"
+      policy: always
+
+    # Extra mountpoints
+    volume-mounts:
+      - src: "/tmp"
+        dest: "/test1"
+        options: "Z"
+
+    # Use host network
+    container-options:
+      - "--net=host"
+
+  format: json
+
+  logging:
+    level: critical
+    # append: False
+    # file: /tmp/log.txt
+
+  # Uncomment to have the output same as in ansible-playbook format
+  # mode: stdout
+
+  playbook-artifact:
+    enable: false
+
+  # time-zone: Japan

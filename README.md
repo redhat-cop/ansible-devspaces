@@ -38,16 +38,21 @@ The Ansible Development Tools (ADT) package provides a curated suite of utilitie
 
 ## Getting Started
 
-To launch this environment, you can import this Git repository directly into your OpenShift Dev Spaces dashboard.
+To launch this environment, you can create a workspace with this Git repository directly from your OpenShift Dev Spaces dashboard.
 
 **Launch Instructions:**
 1. In your browser, navigate to your organization's OpenShift Dev Spaces dashboard and log in.
-2. (Optional) If your organization has not integrated OAuth authentication, you may first need to add your Git Personal Access Token (PAT) under **User Preferences > Personal Access Tokens**.
-3. Select **Create Workspace** in the navigation pane.
-4. In the **Import from Git** field, enter the URL for this Git repository.
-5. Click **Create & Open**.
+1. Select **Create Workspace** in the navigation pane.
+1. In the **Import from Git** field, enter the URL for this Git repository.
+1. Click **Create & Open**.
 
 Once the provisioning process completes, a VS Code environment will open in your browser, ready for development.
+
+There is a sample `ansible-navigator.yaml` file in the root of this project.
+
+1. Rename `ansible-navigator.yaml.sample` to `ansible-navigator.yaml`
+1. Make any desired modifications to the file.
+1. Launch the environment from a teminal by running `ansible-navigator`
 
 ## Best Practices
 
