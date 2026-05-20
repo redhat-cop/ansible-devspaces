@@ -35,6 +35,25 @@ The Ansible Development Tools (ADT) package provides a curated suite of utilitie
 
     * **ansible-dev-environment (ADE)**: A utility for building and managing isolated virtual workspaces specifically tailored for Ansible content development
 
+## Prerequisites
+
+Support for building and running containers in Dev Spaces requires that the `CheCluster` be configured properly.
+
+```yaml
+...
+spec:
+  devEnvironments:
+    disableContainerRunCapabilities: false
+```
+
+The following command can be used to patch the `CheCluster` Custom Resource to apply the required configuration (be sure to update the name of the resource and namespace accordingly).
+
+```shell
+export CHECLUSTER_NAME=<insert name>
+export CHECLUSTER_NAMESPACE=<insert namespace>
+
+oc patch -n $CHECLUSTER_NAMESPACE checluster $CHECLUSTER_NAME --type='json' -p='[{"op": "replace", "path": "/spec/devEnvironments/disableContainerRunCapabilities", "value": false}]'
+```
 
 ## Getting Started
 
